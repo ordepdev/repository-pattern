@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace RepositoryPattern.BL
@@ -27,11 +24,11 @@ namespace RepositoryPattern.BL
 
         // Summary:
         //     Returns all entities of the sequence.
-        IEnumerable<T> All();
+        List<T> All();
 
         // Summary:
         //     Filters a sequence of values based on a predicate.
-        IEnumerable<T> Where(Expression<Func<T, bool>> predicate);
+        List<T> Where(Expression<Func<T, bool>> predicate);
 
         // Summary:
         //     Returns the first element of a sequence that satisfies a specified condition

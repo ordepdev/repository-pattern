@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
-using RepositoryPattern.DL;
 
 namespace RepositoryPattern.BL
 {
@@ -23,9 +20,7 @@ namespace RepositoryPattern.BL
         public void Add(T entity)
         {
             entity.Id = Guid.NewGuid();
-            entity.CreatedBy = HttpContext.Current.User.Identity.Name;
             entity.CreatedOn = DateTime.Now;
-            entity.ModifiedBy = HttpContext.Current.User.Identity.Name;
             entity.ModifiedOn = DateTime.Now;
             this.dbSet.Add(entity);
         }
@@ -37,18 +32,17 @@ namespace RepositoryPattern.BL
 
         public void Update(T entity)
         {
-            entity.ModifiedBy = HttpContext.Current.User.Identity.Name;
             entity.ModifiedOn = DateTime.Now;
         }
 
-        public IEnumerable<T> All()
+        public List<T> All()
         {
-            return this.dbSet.AsEnumerable();
+            return this.dbSet.ToList();
         }
 
-        public IEnumerable<T> Where(Expression<Func<T, bool>> predicate)
+        public List<T> Where(Expression<Func<T, bool>> predicate)
         {
-            return this.dbSet.Where(predicate);
+            return this.dbSet.Where(predicate).ToList();
         }
 
         public T FirstOrDefault(Expression<Func<T, bool>> predicate)

@@ -1,14 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace RepositoryPattern.DL
 {
     public partial class RepositoryPatternContext : DbContext
     {
-        public RepositoryPatternContext() : base("name=RepositoryPatternContext")
+        public RepositoryPatternContext()
+            : base("name=RepositoryPatternContext")
         {
 
         }

@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace RepositoryPattern.DL
 {
-    // Summary
-    //    Represents a base entity for the application and
-    //    assumes that all entities have this fields.
-    //    In special occasions they can be omitted.
     public interface IEntity
     {
         Guid Id
@@ -17,19 +13,8 @@ namespace RepositoryPattern.DL
             get;
             set;
         }
-        string CreatedBy
-        {
-            get;
-            set;
-        }
-
+        
         DateTime CreatedOn
-        {
-            get;
-            set;
-        }
-
-        string ModifiedBy
         {
             get;
             set;
