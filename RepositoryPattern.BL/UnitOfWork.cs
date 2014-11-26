@@ -24,9 +24,6 @@ namespace RepositoryPattern.BL
             this.dbContext.SaveChanges();
         }
 
-        // Summary
-        //      When calling unitOfWork.Repository<T>()
-        //      this returns the specific <T> repository.
         public IRepository<T> Repository<T>() where T : class
         {
             if (repositories == null)

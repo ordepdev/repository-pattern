@@ -10,10 +10,16 @@ namespace RepositoryPattern.Tests
     [TestClass]
     public class RepositoryPatternTests
     {
+        public UnitOfWork uow;
+
+        public RepositoryPatternTests()
+        {
+            uow = new UnitOfWork();
+        }
+
         [TestMethod]
         public void TypesMustMatch()
         {
-            UnitOfWork uow = new UnitOfWork();
             var repo = uow.Repository<DL.Foo>().GetType();
             Assert.AreEqual(typeof (DL.Foo).FullName, uow.Repository<DL.Foo>().GetType().GenericTypeArguments[0].FullName);
         }
@@ -21,12 +27,17 @@ namespace RepositoryPattern.Tests
         [TestMethod]
         public void ShouldInsertOneRow()
         {
-            UnitOfWork uow = new UnitOfWork();
-
             uow.Repository<DL.Foo>().Add(new Foo() { Name = "foo" });
+
             uow.Commit();
 
             Assert.AreNotEqual(0, uow.Repository<DL.Foo>().Where(x => x.Name == "foo").Count);
+        }
+
+        [TestMethod]
+        public void ExtendedMethodShouldRetrieveOneResult()
+        {
+            Assert.AreNotEqual(null, uow.Repository<DL.Foo>().GetByFooName("foo"));
         }
     }
 }
