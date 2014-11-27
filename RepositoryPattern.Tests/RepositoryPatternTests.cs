@@ -39,5 +39,25 @@ namespace RepositoryPattern.Tests
         {
             Assert.AreNotEqual(null, uow.Repository<DL.Foo>().GetByFooName("foo"));
         }
+        
+        [TestMethod]
+        public void FirstOrDefaultShouldRetrieveOneResult()
+        {
+            Assert.AreNotEqual(null, uow.Repository<DL.Foo>().FirstOrDefault());
+        }
+        
+        [TestMethod]
+        public void RemoveShouldWork()
+        {
+            var before = uow.Repository<DL.Foo>().All();
+            var foo = uow.Repository<DL.Foo>().FirstOrDefault();
+            
+            uow.Repository<DL.Foo>().Remove(foo);
+            uow.Commit();
+            
+            var after = uow.Repository<DL.Foo>().All();
+            
+            Assert.AreNotEqual(before.Count, after.Count);
+        }
     }
 }
