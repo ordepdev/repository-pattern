@@ -43,14 +43,14 @@ namespace RepositoryPattern.Tests
         [TestMethod]
         public void FirstOrDefaultShouldRetrieveOneResult()
         {
-            Assert.AreNotEqual(null, uow.Repository<DL.Foo>().FirstOrDefault());
+            Assert.AreNotEqual(null, uow.Repository<DL.Foo>().FirstOrDefault(x => x.Name == "foo"));
         }
         
         [TestMethod]
         public void RemoveShouldWork()
         {
             var before = uow.Repository<DL.Foo>().All();
-            var foo = uow.Repository<DL.Foo>().FirstOrDefault();
+            var foo = uow.Repository<DL.Foo>().FirstOrDefault(x => x.Name == "foo");
             
             uow.Repository<DL.Foo>().Remove(foo);
             uow.Commit();
